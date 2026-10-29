@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Canvas Pages to PDF</title>
+  <link rel="icon" type="image/png" href="../icons/icon32.png">
   <link rel="stylesheet" href="info.css">
 </head>
 
@@ -75,6 +76,9 @@
               <strong>Dark Mode & Themes:</strong> Custom themes or extensions (like BetterCanvas) will transfer their
               custom styling into the generated PDF.
             </li>
+            <li>
+              <strong>LaTeX & Formula Typesetting:</strong> Automatically scans and reverse-engineers Canvas formula images, typesets them with the embedded KaTeX engine into crisp vector math, and injects copyable LaTeX code so formulas can be selected and copied as raw LaTeX (note: static screenshots or external pasted pictures of equations uploaded by instructors without Canvas math metadata cannot be extracted).
+            </li>
           </ul>
         </div>
       </section>
@@ -87,6 +91,7 @@
             <img src="../icons/icon128.png" alt="Canvas Pages to PDF Icon" class="branding-logo" width="72" height="72">
             <div class="branding-details">
               <span class="project-name">Canvas Pages to PDF</span>
+              <span id="extension-version" class="version-tag">v1.1.0</span>
               <span class="project-summary">Converts Static Instructure Canvas Pages to properly formatted and printable
                 PDF</span>
             </div>
@@ -133,7 +138,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="copyright">&copy; 2026 the jchengroa team</div>
+      <div class="copyright">&copy; 2026 <a href="https://thejchengroateam.com" target="_blank" rel="noopener noreferrer" class="meta-link">the jchengroa team</a></div>
     </footer>
 
   </div>

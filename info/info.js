@@ -5,4 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
       window.close();
     });
   }
+
+  const versionEl = document.getElementById('extension-version');
+  if (versionEl && chrome?.runtime?.getManifest) {
+    const manifest = chrome.runtime.getManifest();
+    if (manifest && manifest.version) {
+      versionEl.textContent = `v${manifest.version}`;
+    }
+  }
 });

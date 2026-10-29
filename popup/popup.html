@@ -1,47 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Canvas to PDF</title>
+  <title>Canvas Pages to PDF</title>
   <link rel="stylesheet" href="popup.css">
 </head>
+
 <body>
   <div class="popup-container">
-    <header class="header">
-      <h1 class="title">Canvas to PDF</h1>
-      <p class="subtitle">Extract clean content without Canvas UI</p>
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="brand">
+        <img src="../icons/icon32.png" alt="Logo" class="brand-logo" width="22" height="22">
+        <div class="brand-info">
+          <h1 class="brand-title">Canvas Pages to PDF</h1>
+        </div>
+      </div>
+      <button id="btn-open-info" class="icon-btn" title="About & Settings Info" aria-label="About">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+      </button>
     </header>
 
-    <div class="page-meta" id="page-meta">
-      <div id="page-title-preview" class="truncate">Checking active tab...</div>
+    <!-- Page Target Meta -->
+    <div class="target-card">
+      <div class="target-meta">
+        <svg class="target-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+        </svg>
+        <span id="page-title-preview" class="truncate" title="Checking active tab...">Checking active tab...</span>
+      </div>
     </div>
 
-    <div id="theme-warning" class="theme-warning hidden">
-      <span><strong>Custom Theme Active:</strong> Retaining custom theme in PDF.</span>
-    </div>
-
-    <button id="btn-convert" class="btn-primary">
-      <svg class="btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-        <circle cx="12" cy="12" r="3"></circle>
-      </svg>
-      <span id="btn-text">View PDF</span>
-    </button>
-
-    <div id="status-msg" class="status-msg hidden"></div>
-
-    <button id="btn-open-info" class="btn-secondary">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Theme Alert (conditional) -->
+    <div id="theme-warning" class="theme-banner hidden">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="10"></circle>
-        <line x1="12" y1="16" x2="12" y2="12"></line>
-        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
       </svg>
-      <span>About</span>
-    </button>
+      <span>Custom Canvas theme active.</span>
+    </div>
+
+    <!-- PDF Options Card -->
+    <section class="settings-card">
+      <div class="card-header">
+        <span class="card-title">Options</span>
+      </div>
+
+      <!-- Option 1: Front Cover Screen -->
+      <div class="setting-row">
+        <div class="setting-info">
+          <label for="opt-front-cover" class="setting-label">Cover Page</label>
+          <span class="setting-desc">Clean title front cover</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="opt-front-cover">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Option 2: Table of Contents -->
+      <div class="setting-row">
+        <div class="setting-info">
+          <label for="opt-toc" class="setting-label">Table of Contents</label>
+          <span class="setting-desc">Interactive links to sections in PDF</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="opt-toc">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Option 3: Compact Elements -->
+      <div class="setting-row">
+        <div class="setting-info">
+          <label for="opt-compact" class="setting-label">Compact Layout</label>
+          <span class="setting-desc">Compress elements to save pages</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="opt-compact">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Option 4: Page Numbers Accordion / Group -->
+      <div class="setting-group">
+        <div class="setting-row" style="margin-bottom: 0;">
+          <div class="setting-info">
+            <label for="opt-page-numbers" class="setting-label">Page Numbers</label>
+            <span class="setting-desc">Add numbering to printed pages</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="opt-page-numbers">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div id="page-num-options" class="page-num-options hidden">
+          <span class="sub-label">Position (6 Locations)</span>
+          <!-- 6 Positions Matrix -->
+          <div class="position-grid" role="radiogroup" aria-label="Page number position">
+            <label class="pos-cell" title="Top Left (Front Left)">
+              <input type="radio" name="page-num-pos" value="top-left">
+              <span class="pos-tag">TL</span>
+            </label>
+            <label class="pos-cell" title="Top Center (Front Center)">
+              <input type="radio" name="page-num-pos" value="top-center">
+              <span class="pos-tag">TC</span>
+            </label>
+            <label class="pos-cell" title="Top Right (Front Right)">
+              <input type="radio" name="page-num-pos" value="top-right">
+              <span class="pos-tag">TR</span>
+            </label>
+            <label class="pos-cell" title="Bottom Left (Back Left)">
+              <input type="radio" name="page-num-pos" value="bottom-left">
+              <span class="pos-tag">BL</span>
+            </label>
+            <label class="pos-cell" title="Bottom Center (Back Center)">
+              <input type="radio" name="page-num-pos" value="bottom-center" checked>
+              <span class="pos-tag">BC</span>
+            </label>
+            <label class="pos-cell" title="Bottom Right (Back Right)">
+              <input type="radio" name="page-num-pos" value="bottom-right">
+              <span class="pos-tag">BR</span>
+            </label>
+          </div>
+          <div class="pos-legend">
+            <span>Front (Top): L · C · R</span>
+            <span>Back (Bottom): L · C · R</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <div class="action-section">
+      <button id="btn-convert" class="btn-primary">
+        <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        <span id="btn-text">Generate PDF</span>
+      </button>
+
+      <div id="status-msg" class="status-msg hidden"></div>
+    </div>
   </div>
 
   <script src="popup.js"></script>
 </body>
-</html>
 
+</html>
