@@ -10,135 +10,129 @@
 </head>
 
 <body>
-  <div class="page-container">
+  <div class="page">
 
-    <!-- Header / Branding -->
-    <header class="header">
-      <h1 class="main-title">Canvas Pages to PDF</h1>
-      <p class="tagline">a project by <span class="creator">thejchengroateam</span></p>
+    <header class="masthead">
+      <img class="masthead-logo" src="../icons/icon48.png" alt="" width="32" height="32">
+      <div>
+        <h1 class="masthead-title">Canvas Pages to PDF</h1>
+        <p class="masthead-sub">
+          Clean, selectable-text PDFs of Instructure Canvas pages.
+          <span id="extension-version" class="version">v1.2.0</span>
+        </p>
+      </div>
     </header>
 
-    <!-- Grid Container -->
-    <main class="grid-container">
+    <main>
 
-      <!-- How to Use Card -->
-      <section class="card">
-        <h2 class="card-title">How to Use</h2>
-        <div class="card-body">
-          <ol class="step-list">
-            <li>
-              <strong>Open Canvas Page:</strong> Navigate to any Canvas LMS page (such as Pages, Syllabus, Modules, or
-              Assignments).
-            </li>
-            <li>
-              <strong>Open Extension:</strong> Click the <em>Canvas to PDF</em> extension icon from your browser
-              toolbar.
-            </li>
-            <li>
-              <strong>Click View PDF:</strong> The extension automatically prepares lazy-loaded images, formats the
-              layout, and opens the preview.
-            </li>
-            <li>
-              <strong>Save as PDF:</strong> In the browser print dialog, choose <em>Save as PDF</em>, ensure
-              <em>Background graphics</em> is checked, and click Save.
-            </li>
-          </ol>
-        </div>
+      <section class="block">
+        <h2 class="block-title">How to Use</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num" aria-hidden="true">1</span>
+            <div>
+              <p class="step-name">Open a Canvas page</p>
+              <p class="step-desc">Go to the Pages, Syllabus, Modules or Assignments page you want to save.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">2</span>
+            <div>
+              <p class="step-name">Open the extension</p>
+              <p class="step-desc">Click the Canvas to PDF icon in your browser toolbar.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">3</span>
+            <div>
+              <p class="step-name">Choose Generate PDF</p>
+              <p class="step-desc">The extension prepares images, formats the layout and opens the print preview.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">4</span>
+            <div>
+              <p class="step-name">Save as PDF</p>
+              <p class="step-desc">Pick <strong>Save as PDF</strong>, keep <strong>Background graphics</strong> turned
+                on, then save.</p>
+            </div>
+          </li>
+        </ol>
       </section>
 
-      <!-- Things to Know Card -->
-      <section class="card">
-        <h2 class="card-title">Things to Know</h2>
-        <div class="card-body">
-          <ul class="bullet-list">
-            <li>
-              <strong>Clean Export:</strong> Navigation bars, sidebars, header breadcrumbs, and bottom edit panels are
-              automatically hidden in the PDF.
-            </li>
-            <li>
-              <strong>Vector & Searchable:</strong> Content remains pure selectable text, preserving copy-paste and
-              search capabilities.
-            </li>
-            <li>
-              <strong>Lazy Images Preloaded:</strong> Offscreen images and figures are preloaded before printing to
-              prevent missing pictures.
-            </li>
-            <li>
-              <strong>No Sliced Tables & Images:</strong> Tables, diagrams, and images avoid being awkwardly split
-              across pages when they don't fit.
-            </li>
-            <li>
-              <strong>Smart Layout Recognition:</strong> Automatically recognizes section headers, dividers, lead-ins,
-              tables, and note cards even when non-standard tags (like styled paragraphs or custom divs) are used,
-              preventing orphaned titles and broken sections.
-            </li>
-            <li>
-              <strong>Dark Mode & Themes:</strong> Custom themes or extensions (like BetterCanvas) will transfer their
-              custom styling into the generated PDF.
-            </li>
-            <li>
-              <strong>LaTeX & Formula Typesetting:</strong> Automatically scans and reverse-engineers Canvas formula images, typesets them with the embedded KaTeX engine into crisp vector math, and injects copyable LaTeX code so formulas can be selected and copied as raw LaTeX (note: static screenshots or external pasted pictures of equations uploaded by instructors without Canvas math metadata cannot be extracted).
-            </li>
-          </ul>
-        </div>
+      <section class="block">
+        <h2 class="block-title">Things to Know</h2>
+        <ul class="facts">
+          <li><strong>Clean export.</strong> Navigation bars, sidebars, breadcrumbs and bottom edit bars are hidden from
+            the PDF.</li>
+          <li><strong>Real text.</strong> Output is vector text, so it stays selectable, copyable and searchable.</li>
+          <li><strong>Images preloaded.</strong> Offscreen and lazy-loaded images are fetched before printing, so
+            figures aren't missing.</li>
+          <li><strong>Nothing cut in half.</strong> Tables, diagrams and images are kept whole when they fit on a
+            page.</li>
+          <li><strong>Layout aware.</strong> Headings, dividers, lead-ins and note cards are detected even when pages
+            use styled paragraphs or custom divs.</li>
+          <li><strong>No stranded headings.</strong> A section banner or title moves to the next page together with the
+            block that follows it (skipped in Compact Layout).</li>
+          <li><strong>Themes and dark mode.</strong> Custom themes such as BetterCanvas carry over, and dark palettes
+            are re-tinted so text stays readable on white. Colored callouts keep their look.</li>
+          <li><strong>Safe on assignment pages.</strong> The PDF is built from a throwaway copy in its own document, so
+            Canvas' React pages are never modified or restyled.</li>
+          <li><strong>Embedded tools.</strong> Same-origin frames such as the text-entry editor are copied in; external
+            tools (Studio, YouTube, publisher LTIs) become a placeholder box.</li>
+          <li><strong>Rendered widgets.</strong> Canvas-drawn graphics and open shadow-DOM content (some maths and
+            custom widgets) are snapshotted from the live page, so they don't turn into empty boxes in the PDF.</li>
+          <li><strong>Formulas.</strong> Canvas equation images are re-typeset with KaTeX into vector math, so equations
+            stay sharp and remain selectable text in the PDF. If a typeset formula cannot render (theme or font
+            interference), the original equation image is kept so the formula never disappears. Screenshots of
+            equations without math metadata can't be extracted.</li>
+        </ul>
       </section>
 
-      <!-- About Card -->
-      <section class="card">
-        <h2 class="card-title">About</h2>
-        <div class="card-body">
-          <div class="branding-box">
-            <img src="../icons/icon128.png" alt="Canvas Pages to PDF Icon" class="branding-logo" width="72" height="72">
-            <div class="branding-details">
-              <span class="project-name">Canvas Pages to PDF</span>
-              <span id="extension-version" class="version-tag">v1.1.0</span>
-              <span class="project-summary">Converts Static Instructure Canvas Pages to properly formatted and printable
-                PDF</span>
-            </div>
-          </div>
-          <p class="branding-note">
-            <a href="https://github.com/thejchengroateam/CanvasPagestoPDF" target="_blank" rel="noopener noreferrer"
-              class="meta-link">https://github.com/thejchengroateam/CanvasPagestoPDF</a>
-          </p>
-        </div>
-      </section>
-
-      <!-- Credits Card -->
-      <section class="card">
-        <h2 class="card-title">Credits</h2>
-        <div class="card-body">
-          <div class="meta-details">
-            <div class="meta-row">
-              <span class="meta-label">Creator:</span>
-              <span class="meta-value">John Carlo Cheng Roa from thejchengroateam</span>
-            </div>
-            <div class="meta-row">
-              <span class="meta-label">Website:</span>
-              <span class="meta-value"><a href="https://thejchengroateam.com" target="_blank" rel="noopener noreferrer"
-                  class="meta-link">thejchengroateam.com</a></span>
-            </div>
-            <div class="meta-row">
-              <span class="meta-label">GitHub:</span>
-              <span class="meta-value"><a href="https://github.com/thejchengroateam" target="_blank"
-                  rel="noopener noreferrer" class="meta-link">github.com/thejchengroateam</a></span>
-            </div>
-            <div class="meta-row">
-              <span class="meta-label">Extension:</span>
-              <span class="meta-value">Canvas Pages to PDF</span>
-            </div>
-            <div class="meta-row">
-              <span class="meta-label">Platform:</span>
-              <span class="meta-value">Chromium (Chrome, Edge, Brave)</span>
-            </div>
+      <section class="block">
+        <h2 class="block-title">About</h2>
+        <div class="about">
+          <img class="about-logo" src="../icons/icon128.png" alt="" width="52" height="52">
+          <div>
+            <p class="about-name">Canvas Pages to PDF</p>
+            <p class="about-desc">A Chrome extension that turns Instructure Canvas pages into print-ready PDFs
+              without the Canvas interface.</p>
+            <p class="about-link"><a class="link"
+                href="https://github.com/thejchengroateam/CanvasPagestoPDF" target="_blank"
+                rel="noopener noreferrer">github.com/thejchengroateam/CanvasPagestoPDF</a></p>
           </div>
         </div>
+      </section>
+
+      <section class="block">
+        <h2 class="block-title">Credits</h2>
+        <dl class="credits">
+          <div class="credit">
+            <dt>Creator</dt>
+            <dd>John Carlo Cheng Roa, thejchengroateam</dd>
+          </div>
+          <div class="credit">
+            <dt>Website</dt>
+            <dd><a class="link" href="https://thejchengroateam.com" target="_blank"
+                rel="noopener noreferrer">thejchengroateam.com</a></dd>
+          </div>
+          <div class="credit">
+            <dt>GitHub</dt>
+            <dd><a class="link" href="https://github.com/thejchengroateam" target="_blank"
+                rel="noopener noreferrer">github.com/thejchengroateam</a></dd>
+          </div>
+          <div class="credit">
+            <dt>Platform</dt>
+            <dd>Chromium (Chrome, Edge, Brave)</dd>
+          </div>
+        </dl>
       </section>
 
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
-      <div class="copyright">&copy; 2026 <a href="https://thejchengroateam.com" target="_blank" rel="noopener noreferrer" class="meta-link">the jchengroa team</a></div>
+      <p>&copy; 2026 <a class="link" href="https://thejchengroateam.com" target="_blank"
+          rel="noopener noreferrer">thejchengroateam</a></p>
     </footer>
 
   </div>
